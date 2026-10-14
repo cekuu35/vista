@@ -39,6 +39,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.isClientComponent = isClientComponent;
 exports.resetMountCounter = resetMountCounter;
 exports.ClientBoundary = ClientBoundary;
 exports.wrapClientComponent = wrapClientComponent;

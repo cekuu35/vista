@@ -15,7 +15,7 @@ const clientComponentCache = new Map<string, boolean>();
 /**
  * Check if a file is a client component by checking for 'use client' directive
  */
-function isClientComponent(filePath: string): boolean {
+export function isClientComponent(filePath: string): boolean {
     if (clientComponentCache.has(filePath)) {
         return clientComponentCache.get(filePath)!;
     }
