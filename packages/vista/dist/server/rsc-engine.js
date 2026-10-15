@@ -154,6 +154,8 @@ function shouldInvalidateDevModule(modulePath, cwd) {
     return /\.(?:[cm]?[jt]sx?|json)$/i.test(normalized);
 }
 function clearProjectRequireCache(cwd) {
+    const { resetClientComponentCache } = require('./client-boundary');
+    resetClientComponentCache();
     for (const key of Object.keys(require.cache)) {
         if (!shouldInvalidateDevModule(key, cwd))
             continue;

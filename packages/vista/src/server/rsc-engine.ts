@@ -230,6 +230,8 @@ function shouldInvalidateDevModule(modulePath: string, cwd: string): boolean {
 }
 
 function clearProjectRequireCache(cwd: string): void {
+  const { resetClientComponentCache } = require('./client-boundary');
+  resetClientComponentCache();
   for (const key of Object.keys(require.cache)) {
     if (!shouldInvalidateDevModule(key, cwd)) continue;
     delete require.cache[key];

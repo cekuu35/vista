@@ -13,6 +13,15 @@ import * as path from 'path';
 const clientComponentCache = new Map<string, boolean>();
 
 /**
+ * Clear the client-component detection cache.
+ * Called by the dev server when it invalidates project modules so a flipped
+ * 'use client' directive is picked up without a restart.
+ */
+export function resetClientComponentCache(): void {
+    clientComponentCache.clear();
+}
+
+/**
  * Check if a file is a client component by checking for 'use client' directive
  */
 export function isClientComponent(filePath: string): boolean {
