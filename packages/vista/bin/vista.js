@@ -46,15 +46,15 @@ function parseEnvLine(line) {
   const key = withoutExport.slice(0, eq).trim();
   if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(key)) return null;
   let value = withoutExport.slice(eq + 1).trim();
-  if (!value.startsWith('"') && !value.startsWith("'")) {
+  const quote = value[0];
+  if (quote === '"' || quote === "'") {
+    // Quoted value: take content up to the matching closing quote; anything
+    // after it (e.g. an inline comment) is ignored.
+    const closing = value.indexOf(quote, 1);
+    if (closing !== -1) value = value.slice(1, closing);
+  } else {
     const hashIndex = value.indexOf(' #');
     if (hashIndex !== -1) value = value.slice(0, hashIndex).trim();
-  }
-  if (
-    (value.startsWith('"') && value.endsWith('"') && value.length >= 2) ||
-    (value.startsWith("'") && value.endsWith("'") && value.length >= 2)
-  ) {
-    value = value.slice(1, -1);
   }
   return [key, value];
 }
